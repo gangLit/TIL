@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function firstQ() {
+        let data = [
+          " + -- + - + - ",
+          " + --- + - + ",
+          " + -- + - + - ",
+          " + - + - + - + ",
+        ];
+
+        let result = "";
+
+        for (const s of data) {
+          console.log(
+            s.replace(/ /g, "").replace(/\+/g, "1").replace(/-/g, "0")
+          );
+          console.log(
+            parseInt(
+              s.replace(/ /g, "").replace(/\+/g, "1").replace(/-/g, "0"),
+              2
+            )
+          );
+          console.log(
+            String.fromCharCode(
+              parseInt(
+                s.replace(/ /g, "").replace(/\+/g, "1").replace(/-/g, "0"),
+                2
+              )
+            )
+          );
+          result += String.fromCharCode(
+            parseInt(
+              s.replace(/ /g, "").replace(/\+/g, "1").replace(/-/g, "0"),
+              2
+            )
+          );
+        }
+
+        console.log(result);
+      }
+
+      function secondQ() {
+        let 내구도 = [5, 3, 4, 1, 3, 8, 3];
+        let 독 = [
+          {
+            이름: "루비독",
+            나이: "95년생",
+            점프력: "3",
+            몸무게: "4",
+          },
+          {
+            이름: "피치독",
+            나이: "95년생",
+            점프력: "3",
+            몸무게: "3",
+          },
+          {
+            이름: "씨-독",
+            나이: "72년생",
+            점프력: "2",
+            몸무게: "1",
+          },
+          {
+            이름: "코볼독",
+            나이: "59년생",
+            점프력: "1",
+            몸무게: "1",
+          },
+        ];
+
+        function 징검다리를건너라(내구도, 독) {
+          answer = [];
+          for (let 개별독 of 독) {
+            let 독의위치 = 0;
+            let 실패 = false;
+
+            while (독의위치 < 내구도.length - 1) {
+              독의위치 += parseInt(개별독["점프력"], 10);
+              내구도[독의위치 - 1] -= parseInt(개별독["몸무게"], 10);
+
+              if (내구도[독의위치 - 1] < 0) {
+                실패 = true;
+                break;
+              }
+            }
+
+            if (!실패) {
+              answer.push(개별독["이름"]);
+            }
+          }
+          return answer;
+        }
+
+        console.log(징검다리를건너라(내구도, 독));
+      }
+
+      let 대기인원 = 14000605;
+
+      /*
+      9시        25      25
+      9시 10분   15      40
+      9시 20분   15      55
+      9시 30분   15      70
+      9시 40분   15      85
+      9시 50분   15      100
+
+      100명씩 12시간 : 1200명
+      */
+
+      console.log(대기인원 / 1200);
+
+      let 일년일수 = 0;
+
+      for (let i = 1; i < 11; i++) {
+        일년일수 = array[i];
+      }
+    </script>
+  </body>
+</html>

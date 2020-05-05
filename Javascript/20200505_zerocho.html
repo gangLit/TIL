@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <input type="number" id="input" minlength="4" maxlength="4" />
+      <button id="check">확인</button>
+    </div>
+    <div id="logs"></div>
+    <script>
+      const input = document.querySelector("#input");
+      const check = document.querySelector("#check");
+      const logs = document.querySelector("#logs");
+
+      let numbers = Array(10)
+        .fill()
+        .map((v, i) => i);
+      // let numbers = [];
+      // for (let n = 0; n <= 9; n++) {
+      //   numbers.push(n);
+      // }
+      let answer = [];
+
+      for (let n = 0; n <= 3; n++) {
+        const index = Math.floor(Math.random() * numbers.length);
+        answer.push(numbers[index]);
+        numbers.splice(index, 1);
+      }
+      console.log(answer);
+
+      let count = 0;
+      check.addEventListener("click", () => {
+        const value = input.value;
+        if (value && value.length === 4) {
+          if (answer.join("") === value) {
+            // logs.textContent = 'HR'
+            // 기존 글자를 싹 다 지워버리고 덮어씌우는 것
+            logs.appendChild(document.createTextNode("HR"));
+            // 기존 글자 두고 추가하는 것
+          } else {
+            console.log("다르다");
+            console.log(count);
+            let strike = 0;
+            let ball = 0;
+            for (const [aIndex, aNumber] of answer.entries()) {
+              for (const [iIndex, iString] of input.value.split("").entries()) {
+                if (aNumber === Number(iString)) {
+                  if (aIndex === iIndex) {
+                    strike += 1;
+                  } else {
+                    ball += 1;
+                  }
+                }
+              }
+            }
+            logs.append(
+              `${input.value} : ${strike} strike ${ball} ball`,
+              document.createElement("br")
+            );
+            if (count > 9) {
+              logs.append(
+                `Game Over: ${answer.join("")}`,
+                document.createElement("br")
+              );
+            } else {
+              count++;
+            }
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
